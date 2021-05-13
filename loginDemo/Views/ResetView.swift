@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResetView: View {
     @State var showAlert:Bool = false
+    @State var isValidReset:Bool = false
     @ObservedObject var manager:AppManager
     
     init(with mg:AppManager = AppManager.dummyData()) {
@@ -20,14 +21,9 @@ struct ResetView: View {
             ZStack {
                 VStack(spacing: 25) {
                     Spacer()
-                    if let name = manager.savedUser?.name {
-                        VStack {
-                            Text("Welcome \(name)!")
-                            Text("Please reset your password!")
-                        }
-                        .font(.title)
-                        .foregroundColor(.blue)
-                    }
+                    Text("Please reset your password!")
+                    .font(.title)
+                    .foregroundColor(.red)
                     HStack {
                         VStack(alignment: .trailing, spacing: 25) {
                             Text("Origin :")
@@ -62,7 +58,8 @@ struct ResetView: View {
                     }
                     
                     Button(action: {
-                        self.showAlert = !self.manager.checkResetInputs()
+                        self.isValidReset = self.manager.isResetInfoValid()
+                        self.showAlert = !self.isValidReset
                     }, label: {
                         Text("Confirm")
                             .font(.title)
@@ -71,7 +68,7 @@ struct ResetView: View {
                             .background(RoundedRectangle(cornerRadius: 20).fill(Color.black))
                     })
                     
-                    NavigationLink("", destination: MainView(with: self.manager),isActive: $manager.isResetPwValid)
+                    NavigationLink("", destination: MainView(with: self.manager),isActive: $isValidReset)
                     
                     Spacer()
                 }

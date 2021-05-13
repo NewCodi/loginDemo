@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,10 @@
 		9FD21D10264CE73800915C07 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD21D0F264CE73800915C07 /* AppManager.swift */; };
 		9FD21D12264CEDCB00915C07 /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD21D11264CEDCB00915C07 /* ResetView.swift */; };
 		9FD21D14264D14AD00915C07 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD21D13264D14AC00915C07 /* MainView.swift */; };
+		9FD21D17264D416200915C07 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD21D16264D416200915C07 /* SwiftKeychainWrapper */; };
+		9FD21D19264D417B00915C07 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD21D18264D417B00915C07 /* DataManager.swift */; };
+		9FD21D1B264D6ED700915C07 /* UserDefaults+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD21D1A264D6ED700915C07 /* UserDefaults+helpers.swift */; };
+		9FD21D1E264D702600915C07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD21D1D264D702600915C07 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,9 @@
 		9FD21D0F264CE73800915C07 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		9FD21D11264CEDCB00915C07 /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
 		9FD21D13264D14AC00915C07 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9FD21D18264D417B00915C07 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		9FD21D1A264D6ED700915C07 /* UserDefaults+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+helpers.swift"; sourceTree = "<group>"; };
+		9FD21D1D264D702600915C07 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD21D17264D416200915C07 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +74,7 @@
 				9FD21D0A264CD64500915C07 /* Model */,
 				9FD21D08264CD62C00915C07 /* Views */,
 				9FD21D09264CD63B00915C07 /* ViewModel */,
+				9FD21D1C264D6F1700915C07 /* Tools */,
 				9FD21CFD264CD5D800915C07 /* Assets.xcassets */,
 				9FD21D02264CD5D800915C07 /* Info.plist */,
 				9FD21CFF264CD5D800915C07 /* Preview Content */,
@@ -95,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				9FD21D0F264CE73800915C07 /* AppManager.swift */,
+				9FD21D18264D417B00915C07 /* DataManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -106,6 +116,15 @@
 				9FD21D0D264CE68700915C07 /* BannerModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9FD21D1C264D6F1700915C07 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9FD21D1A264D6ED700915C07 /* UserDefaults+helpers.swift */,
+				9FD21D1D264D702600915C07 /* Constants.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +143,9 @@
 			dependencies = (
 			);
 			name = loginDemo;
+			packageProductDependencies = (
+				9FD21D16264D416200915C07 /* SwiftKeychainWrapper */,
+			);
 			productName = loginDemo;
 			productReference = 9FD21CF6264CD5D700915C07 /* loginDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -151,6 +173,9 @@
 				Base,
 			);
 			mainGroup = 9FD21CED264CD5D700915C07;
+			packageReferences = (
+				9FD21D15264D416200915C07 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			productRefGroup = 9FD21CF7264CD5D700915C07 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -178,12 +203,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FD21D12264CEDCB00915C07 /* ResetView.swift in Sources */,
+				9FD21D19264D417B00915C07 /* DataManager.swift in Sources */,
 				9FD21D14264D14AD00915C07 /* MainView.swift in Sources */,
 				9FD21D10264CE73800915C07 /* AppManager.swift in Sources */,
 				9FD21CFC264CD5D700915C07 /* LoginView.swift in Sources */,
+				9FD21D1E264D702600915C07 /* Constants.swift in Sources */,
 				9FD21D0C264CE66800915C07 /* UserModel.swift in Sources */,
 				9FD21CFA264CD5D700915C07 /* loginDemoApp.swift in Sources */,
 				9FD21D0E264CE68700915C07 /* BannerModel.swift in Sources */,
+				9FD21D1B264D6ED700915C07 /* UserDefaults+helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +400,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9FD21D15264D416200915C07 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9FD21D16264D416200915C07 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FD21D15264D416200915C07 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9FD21CEE264CD5D700915C07 /* Project object */;
 }

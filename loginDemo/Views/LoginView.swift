@@ -86,7 +86,7 @@ struct LoginView: View {
                 }
                 
                 NavigationLink(
-                    "", destination: ResetView(with: self.manager),
+                    "", destination: MainView(with: self.manager),
                     isActive:$manager.isLogin)
             }
         }

@@ -18,7 +18,6 @@ class AppManager: ObservableObject {
     @Published var resetOldPw:String = ""
     @Published var resetNewPw:String = ""
     @Published var resetConfPw:String = ""
-    @Published var isResetPwValid:Bool = false
     
     @Published var savedUser:User?
     @Published var user:User
@@ -26,6 +25,8 @@ class AppManager: ObservableObject {
     @Published var loginState:LoginState = .LoginState_Nil {
         didSet{
             if loginState == .LoginState_Succeed {
+                savedUser = user
+                setSaveUser()
                 isLogin = true
             }
             else {
@@ -33,14 +34,7 @@ class AppManager: ObservableObject {
             }
         }
     }
-    @Published var isLogin:Bool = false {
-        didSet {
-            if isLogin {
-                savedUser = user
-                setSaveUser()
-            }
-        }
-    }
+    @Published var isLogin:Bool = false
     
     init() {
         user = User(id: UUID(), name: "", password: "")
@@ -49,7 +43,7 @@ class AppManager: ObservableObject {
             Banner(id: UUID(), imageName: "img2"),
             Banner(id: UUID(), imageName: "img3"),
         ]
-        getSavedUser()
+        syncSavedData()
     }
     
     func checkLoginInputs() {
@@ -60,11 +54,9 @@ class AppManager: ObservableObject {
             if let savedUser = savedUser {
                 if savedUser.name==user.name && savedUser.password==user.password {
                     loginState = .LoginState_Succeed
-                    print("valid input")
                 }
                 else{
                     loginState = .LoginState_NotMatch
-                    print("input not match")
                 }
             }
             else {
@@ -73,41 +65,42 @@ class AppManager: ObservableObject {
         }
     }
     
-    func checkResetInputs() -> Bool{
-        isResetPwValid = !resetNewPw.isEmpty
-            && !resetConfPw.isEmpty
-            && resetNewPw == resetConfPw
-            && savedUser?.password == resetOldPw
-        
-        if isResetPwValid {
-            savedUser?.password = resetNewPw
-            resetNewPw = ""
-            resetOldPw = ""
-            resetConfPw = ""
-            setSaveUser()
+    func isResetInfoValid() -> Bool{
+        let ret = !resetNewPw.isEmpty && !resetConfPw.isEmpty && resetNewPw == resetConfPw && savedUser?.password == resetOldPw
+        if ret {
+            updateUserInfo()
+            cleanReset()
         }
-        
-        return isResetPwValid
+        return ret
     }
     
-    func logout() {
-        isLogin = false
-        isResetPwValid = false
-        user.name = ""
-        user.password = ""
-        
+    func cleanReset() {
+        resetNewPw = ""
+        resetOldPw = ""
+        resetConfPw = ""
+    }
+    
+    func updateUserInfo() {
+        savedUser?.password = resetNewPw
         setSaveUser()
     }
     
-    func getSavedUser() {
+    func syncSavedData() {
         // get data from keychains/userdefault
         // if already logon, let it
         // else update the saved user
+        if let user = DataManager.singleton.getUserData(){
+            savedUser = user
+            isLogin = DataManager.singleton.getUserLoginStatus()
+        }
     }
     
     func setSaveUser() {
         // save data to keychains/userdefualt
         // save islogin state
+        if let user = savedUser {
+            DataManager.singleton.saveUserData(user: user, loginState: isLogin)
+        }
     }
     
     static func dummyData() -> AppManager{

@@ -28,16 +28,15 @@ struct MainView: View {
                 .foregroundColor(.red)
             }
             Spacer()
-            Button(action: {
-                self.manager.logout()
-                LoginView(with: self.manager)
-            }, label: {
-                Text("Logout")
-                    .font(.title)
-                    .frame(width: 150, height: 50)
-                    .foregroundColor(.white)
-                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.black))
-            })
+            NavigationLink(
+                destination: ResetView(with: self.manager),
+                label: {
+                    Text("Reset Password")
+                        .font(.title)
+                        .frame(width: 250, height: 50)
+                        .foregroundColor(.white)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(Color.black))
+                })
             Spacer()
         }
         .navigationTitle("")
